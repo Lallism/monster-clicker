@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&display=swap');
+
+:root {
+    --blue: rgb(143, 211, 255);
+    --green: rgb(145, 219, 105);
+    --dark: rgb(46, 34, 47);
+    --light: rgb(155, 171, 178);
+    --light2: rgb(199, 220, 208);
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* Header Stuff */
+
+h1 {
+    margin: auto 10px;
+    font-size: 1.5em;
+    color: var(--dark);
+}
+
+header {
+    display: flex;
+    height: 40px;
+    box-shadow: 0 2px 2px var(--light);
+    background-color: var(--green);
+}
+
+/* Main Content */
+
+main {
+    display: flex;
+}
+
+.left-column {
+    width: 27.5%;
+}
+
+.mid-column {
+    width: 45%;
+}
+
+.right-column {
+    width: 27.5%;
+}
+
+/* General stuff */
+
+.full-height {
+    height: calc(100vh - 40px);
+}
+
+.flex {
+    display: flex;
+}
+
+/* Clicker area */
+
+.clicker-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#clicker {
+    margin-bottom: 80px;
+    transition: transform 0.25s;
+}
+
+#clicker:hover {
+    transform: scale(1.1);
+}
+
+#clicker:active {
+    transform: scale(0.95);
+}
+
+#xp-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 320px;
+    background-color: var(--blue);
+}
+
+/* List stuff */
+
+.list {
+    padding: 0;
+    list-style-type: none;
+    overflow: auto;
+}
+
+.list-item {
+    display: flex;
+    margin: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px var(--light);
+    background-color: var(--light2);
+    transition: background-color 0.25s;
+}
+
+.list-item:hover {
+    background-color: var(--light);
+}
+
+.active-item {
+    background-color: var(--green);
+}
+
+.item-name {
+    font-size: 1.15em;
+    margin: 4px;
+}
+
+.item-description {
+    margin: 4px;
+}
+
+.item-sprite {
+    background-color: white;
+    height: 72px;
+    width: 72px;
+    padding: 4px;
+    margin: 5px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px var(--light) inset;
+}
+
+/* Store */
+
+.currency {
+    margin: 10px 8px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

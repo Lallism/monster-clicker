@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Monster Clicker</title>
+</head>
+<body>
+    <header>
+        <h1>Monster Clicker</h1>
+    </header>
+    <main>
+        <div class="left-column">
+            <div>
+                <div class="currency">
+                    <div class="flex">
+                        <img src="gfx/coin.png" height="32px" width="32px">
+                        <p id="gold-current" class="item-description">0</p>
+                    </div>
+                    <p class="item-description"><span id="gold-income">0</span>/s</p>
+                </div>
+                <ul id="store" class="list">
+                    <li id="store-egg" class="list-item">
+                        <img src="gfx/egg.png" class="item-sprite">
+                        <div>
+                            <p class="item-name">Egg | 100</p>
+                            <p class="item-description">Get a new egg</p>
+                        </div>
+                    </li>
+                    <li id="store-clickpower" class="list-item">
+                        <img src="gfx/cursor_shinyblue.png" class="item-sprite">
+                        <div>
+                            <p class="item-name">Click Power | 10</p>
+                            <p class="item-description">Increase experience on clicks by 1</p>
+                        </div>
+                    </li>
+                    <li id="store-training" class="list-item">
+                        <img src="gfx/experience.png" class="item-sprite">
+                        <div>
+                            <p class="item-name">Training | 30</p>
+                            <p class="item-description">Passively grants 2 experience per second to all monsters</p>
+                        </div>
+                    </li>
+                    <li id="store-goldbonus" class="list-item">
+                        <img src="gfx/coin.png" class="item-sprite">
+                        <div>
+                            <p class="item-name">Gold Bonus | 100</p>
+                            <p class="item-description">Increase total gold income by 10%</p>
+                        </div>
+                    </li>
+                    <li id="store-xpbonus" class="list-item">
+                        <img src="gfx/experience.png" class="item-sprite">
+                        <div>
+                            <p class="item-name">XP Bonus | 500</p>
+                            <p class="item-description">Increase total experience gain by 20%</p>
+                        </div>
+                    </li>
+                    <li id="store-goldclick" class="list-item">
+                        <img src="gfx/cursor_golden.png" class="item-sprite">
+                        <div>
+                            <p class="item-name">Golden Clicks | 2000</p>
+                            <p class="item-description">Gain gold on clicks equal to 1% of current income</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mid-column">
+            <div class="clicker-area full-height">
+                <img src="gfx/egg.png" alt="click" id="clicker" height="256px" width="256px">
+                <div id="xp-bar">
+                    <p id="xp-text">0/100</p>
+                </div>
+            </div>
+        </div>
+        <div class="right-column">
+            <ul id="monster-list" class="list full-height">
+                <li class="list-item" style="display: none;">
+                    <img src="gfx/flamebird.png" class="item-sprite">
+                    <p class="item-name">name, lv</p>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
