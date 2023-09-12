@@ -78,6 +78,8 @@ class Monster {
 const commonMonsters = [
     {name: "Flambirdy", sprite: "flamebird.png", xpReq: 100, xpReqMult: 1.5, baseGold: 1},
     {name: "Sparkitty", sprite: "sparkit.png", xpReq: 80, xpReqMult: 1.8, baseGold: 1.5},
+    {name: "Glacifly", sprite: "frostfly.png", xpReq: 150, xpReqMult: 1.3, baseGold: 1},
+    {name: "Sheeberry", sprite: "sheeberry.png", xpReq: 120, xpReqMult: 1.6, baseGold: 1.5}
 ];
 const uncommonMonsters = [
     {name: "Magmurm", sprite: "magmurm.png", xpReq: 300, xpReqMult: 1.75, baseGold: 3},
