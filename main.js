@@ -1,94 +1,4 @@
-class Monster {
-    constructor(name, sprite, eggXpRequired, baseXpRequired, xpRequiredMultiplier, baseGold, id) {
-        this._name = name;
-        this._sprite = sprite;
-        this._lv = 0;
-        this._xp = 0;
-        this._currentXpRequired = eggXpRequired;
-        this._baseXpRequired = baseXpRequired;
-        this._xpRequiredMultiplier = xpRequiredMultiplier;
-        this._baseGold = baseGold;
-        this._currentGold = 0;
-        this._eggSprite = "egg.png";
-        this._id = id;
-    }
-
-    get name() {
-        if (this._lv == 0) {
-            return "Egg";
-        }
-        return this._name;
-    }
-
-    get lv() {
-        return this._lv;
-    }
-
-    get xp() {
-        return this._xp;
-    }
-
-    get xpRequired() {
-        return this._currentXpRequired;
-    }
-
-    get currentGold() {
-        return this._currentGold;
-    }
-
-    get sprite() {
-        if (this._lv == 0) {
-            return this._eggSprite;
-        }
-        return this._sprite;
-    }
-
-    get id() {
-        return this._id;
-    }
-
-    gainXP(amount) {
-        let lvUp = false;
-        this._xp += amount;
-        if (this._xp >= this._currentXpRequired) {
-            this._lv++;
-            this._currentGold = this._baseGold * this._lv;
-            this._xp = this._xp - this._currentXpRequired;
-            if (this._lv == 1) {
-                this._currentXpRequired = this._baseXpRequired;
-            }
-            else {
-                this._currentXpRequired *= this._xpRequiredMultiplier;
-            }
-            lvUp = true;
-            this.updateMonsterBox(this._id);
-        }
-        return lvUp;
-    }
-
-    updateMonsterBox(id) {
-        let monsterBox = document.getElementById("monster" + id);
-        monsterBox.children[0].src = "gfx/" + this._sprite;
-        monsterBox.children[1].innerText = this._name + ", Lv " + this._lv;
-    }
-}
-
-// Monster data here
-
-const commonMonsters = [
-    {name: "Flambirdy", sprite: "flamebird.png", xpReq: 100, xpReqMult: 1.5, baseGold: 1},
-    {name: "Sparkitty", sprite: "sparkit.png", xpReq: 80, xpReqMult: 1.8, baseGold: 1.5},
-    {name: "Glacifly", sprite: "frostfly.png", xpReq: 150, xpReqMult: 1.3, baseGold: 1},
-    {name: "Sheeberry", sprite: "sheeberry.png", xpReq: 120, xpReqMult: 1.6, baseGold: 1.5}
-];
-const uncommonMonsters = [
-    {name: "Magmurm", sprite: "magmurm.png", xpReq: 300, xpReqMult: 1.75, baseGold: 3},
-    {name: "Slugflora", sprite: "slugflora.png", xpReq: 500, xpReqMult: 1.25, baseGold: 2}
-];
-const rareMonsters = [
-    {name: "Emerald Drake", sprite: "drake_emerald.png", xpReq: 1000, xpReqMult: 2, baseGold: 10},
-    {name: "Goldshell", sprite: "goldshell.png", xpReq: 500, xpReqMult: 2.4, baseGold: 15}
-];
+import { generateMonster } from "./modules/monster.js";
 
 // Main code
 
@@ -111,6 +21,7 @@ let goldIncomePerClick = 0;
 let clickpower = 1;
 let passiveXp = 0;
 let xpGainMultiplier = 1;
+let eggXpReq = 50;
 
 getEgg(0);
 activateMonster(0);
@@ -164,9 +75,10 @@ function activateMonster(monsterId) {
 }
 
 function getEgg(maxRarity) {
-    let monster = generateMonster(maxRarity);
+    let monster = generateMonster(maxRarity, monsters.length, eggXpReq);
     monsters.push(monster);
     addToMonsterList(monster);
+    eggXpReq = (50 + 50 * monsters.length) * (monsters.length + 1);
 }
 
 function addToMonsterList(monster) {
@@ -177,7 +89,7 @@ function addToMonsterList(monster) {
     newLi.setAttribute("class", "list-item");
     newImg.setAttribute("src", "gfx/" + monster.sprite);
     newImg.setAttribute("class", "item-sprite");
-    newP.setAttribute("class", "item-name")
+    newP.setAttribute("class", "item-name");
     newP.innerText = monster.name + ", Lv " + monster.lv;
     newLi.appendChild(newImg);
     newLi.appendChild(newP);
@@ -278,51 +190,29 @@ function buyGoldClick() {
     }
 }
 
-// Monster generating code monster
+// Mobile
 
-function generateMonster(maxRarity) {
-    const uncommonChance = 0.3;
-    const rareChance = 0.1;
-    let randomRarity = Math.random();
-    let rarity = 0;
-    let targetMonster = "";
-    
-    switch (maxRarity) {
-        case 0:
-            break;
-        case 1:
-            if (randomRarity < uncommonChance) {
-                rarity = 1;
-            }
-            break;
-        default:
-            if (randomRarity < rareChance) {
-                rarity = 2;
-            }
-            else if (randomRarity < (uncommonChance + rareChance)) {
-                rarity = 1;
-            }
-    }
+const leftColumn = document.getElementById("left-column");
+const midColumn = document.getElementById("mid-column");
+const rightColumn = document.getElementById("right-column");
+const menuShop = document.getElementById("menu-shop");
+const menuMonsters = document.getElementById("menu-monsters");
 
-    let randomMonster = 0;
+menuShop.addEventListener("click", openShop);
+menuMonsters.addEventListener("click", openMonsters);
 
-    switch (rarity) {
-        case 0:
-            randomMonster = Math.floor(Math.random() * commonMonsters.length);
-            targetMonster = commonMonsters[randomMonster];
-            break;
-        case 1:
-            randomMonster = Math.floor(Math.random() * uncommonMonsters.length);
-            targetMonster = uncommonMonsters[randomMonster];
-            break;
-        case 2:
-            randomMonster = Math.floor(Math.random() * rareMonsters.length);
-            targetMonster = rareMonsters[randomMonster];
-            break;
-    }
+function openShop() {
+  menuShop.setAttribute("class", "menu-button menu-active");
+  menuMonsters.setAttribute("class", "menu-button");
+  leftColumn.setAttribute("class", "flex left-column mobile-active");
+  midColumn.setAttribute("class", "flex mid-column");
+  rightColumn.setAttribute("class", "flex right-column");
+}
 
-    let id = monsters.length;
-    let eggXpReq = (50 + 50 * monsters.length) * (monsters.length + 1); // random maths to make eggs need more xp with more monsters
-    let resultMonster = new Monster(targetMonster.name, targetMonster.sprite, eggXpReq, targetMonster.xpReq, targetMonster.xpReqMult, targetMonster.baseGold, id)
-    return resultMonster;
+function openMonsters() {
+  menuMonsters.setAttribute("class", "menu-button menu-active");
+  menuShop.setAttribute("class", "menu-button");
+  leftColumn.setAttribute("class", "flex left-column");
+  midColumn.setAttribute("class", "flex mid-column mobile-active");
+  rightColumn.setAttribute("class", "flex right-column mobile-active");
 }

@@ -1,76 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&display=swap');
 
 :root {
-    --blue: rgb(143, 211, 255);
-    --green: rgb(145, 219, 105);
-    --dark: rgb(46, 34, 47);
-    --light: rgb(155, 171, 178);
-    --light2: rgb(199, 220, 208);
+  --blue: rgb(143, 211, 255);
+  --green: rgb(145, 219, 105);
+  --dark-green: rgb(30, 188, 115);
+  --dark: rgb(46, 34, 47);
+  --light: rgb(155, 171, 178);
+  --light2: rgb(199, 220, 208);
 }
 
 * {
-    margin: 0;
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 /* Header Stuff */
 
 h1 {
-    margin: auto 10px;
-    font-size: 1.5em;
-    color: var(--dark);
+  margin: auto 10px;
+  font-size: 1.5em;
+  color: var(--dark);
 }
 
 header {
-    display: flex;
-    height: 40px;
-    box-shadow: 0 2px 2px var(--light);
-    background-color: var(--green);
+  display: flex;
+  height: 40px;
+  box-shadow: 0 2px 2px var(--light);
+  background-color: var(--green);
 }
 
 /* Main Content */
 
 main {
-    display: flex;
+  display: flex;
+  flex-direction: column;
 }
 
 .left-column {
-    width: 27.5%;
+  width: 27.5%;
+  height: 100%;
 }
 
 .mid-column {
-    width: 45%;
+  width: 45%;
+  height: 100%;
 }
 
 .right-column {
-    width: 27.5%;
+  width: 27.5%;
+  height: 100%;
+}
+
+.bottom-bar {
+  display: none;
+  height: 40px;
 }
 
 /* General stuff */
 
 .full-height {
-    height: calc(100vh - 40px);
+  height: calc(100vh - 40px);
 }
 
 .flex {
-    display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Clicker area */
 
 .clicker-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #clicker {
-    margin-bottom: 80px;
+    margin-bottom: 10%;
     transition: transform 0.25s;
 }
 
@@ -87,42 +101,63 @@ main {
     align-items: center;
     justify-content: center;
     height: 24px;
-    width: 320px;
+    width: 75%;
+    max-width: 320px;
     background-color: var(--blue);
+}
+
+/* Bottom bar */
+
+.menu-button {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light);
+  border: 1px var(--dark) solid;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+
+.menu-active {
+  background-color: var(--green);
+  border-color: var(--dark-green);
 }
 
 /* List stuff */
 
 .list {
-    padding: 0;
-    list-style-type: none;
-    overflow: auto;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+  overflow: auto;
 }
 
 .list-item {
-    display: flex;
-    margin: 8px;
-    border-radius: 8px;
-    box-shadow: 0 2px 2px var(--light);
-    background-color: var(--light2);
-    transition: background-color 0.25s;
+  display: flex;
+  margin: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px var(--light);
+  background-color: var(--light2);
+  transition: background-color 0.25s;
 }
 
 .list-item:hover {
-    background-color: var(--light);
+  background-color: var(--light);
 }
 
 .active-item {
-    background-color: var(--green);
+  background-color: var(--green);
 }
 
 .item-name {
-    font-size: 1.15em;
-    margin: 4px;
+  font-size: 1.15em;
+  margin: 4px;
 }
 
 .item-description {
-    margin: 4px;
+  margin: 4px;
 }
 
 .item-sprite {
@@ -142,4 +177,40 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 700px) {
+  .left-column {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mid-column {
+    display: none;
+    width: 100%;
+    height: 60%;
+  }
+
+  .right-column {
+    display: none;
+    width: 100%;
+    height: 40%;
+  }
+
+  .mobile-active {
+    display: flex;
+  }
+
+  .main-section {
+    flex-direction: column;
+  }
+
+  .bottom-bar {
+    display: flex;
+  }
+
+  .full-height {
+    height: calc(100vh - 80px);
+  }
 }
